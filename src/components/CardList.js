@@ -1,12 +1,11 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import Card from './Card';
 
 const CardList = ({robots}) => {
-	// const cardsArray = robots.map((user,i) => 
-	// 		<Card key={robots[i].id} id={robots[i].id} name={robots[i].name} email={robots[i].email} username={robots[i].username}/>
-	// 	);
+	// if (true){
+	// 	throw new Error('Ooooh my gosh');
+	// }
 	return(
-		<Fragment>
 			<div>
 				{
 					robots.map((user,i) => 
@@ -18,7 +17,6 @@ const CardList = ({robots}) => {
 		 			/>
 		 		)}
 	 		</div>
-		</Fragment>
 	);
 }
 

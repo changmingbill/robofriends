@@ -4,6 +4,7 @@ import CardList from '../components/CardList';
 import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
 import './App.css';
+import ErrorBoundry from '../components/ErrorBoundry';
 
 class App extends Component{
 
@@ -26,25 +27,27 @@ class App extends Component{
 	}
 
 	render(){
-		const filterRobots = this.state.robots.filter(robot => {
+		const robots = this.state.robots; 
+		const filterRobots = robots.filter(robot => {
 			return robot.name.toLowerCase().includes(this.state.searchfield.toLowerCase())
 		});
 
-		if (this.state.robots.length === 0){
-			return <h1>Loading</h1>
-		}else{
-			return(
-		 	<Fragment>
-			 	<div className="tc">
-				 	<h1 className="f1">Robot friends</h1>
-				 	<SearchBox searchChange={this.onSearchChange}/>
-				 	<Scroll>
-				 		<CardList robots={filterRobots}/>
-				 	</Scroll>
-				</div>
-		 	</Fragment>
+		return (!robots.length) ? 
+			 <h1>Loading</h1> :		
+			(
+			 	<Fragment>
+				 	<div className="tc">
+					 	<h1 className="f1">Robot friends</h1>
+					 	<SearchBox searchChange={this.onSearchChange}/>
+					 	<Scroll>
+					 		<ErrorBoundry>
+					 			<CardList robots={filterRobots}/>
+					 		</ErrorBoundry>
+					 	</Scroll>
+					</div>
+			 	</Fragment>
  			);
-		}
+		
 		
 	}
  
